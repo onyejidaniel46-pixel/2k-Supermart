@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2K Supermart | Supermart & Pharmacy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #DC2A1E;
+      --red-dark: #B91F14;
+      --yellow: #F5DC00;
+      --yellow-soft: #FFF8C2;
+      --orange: #FF8F4D;
+      --ink: #2B1410;
+      --muted: #6E5A55;
+      --line: #EBDFD6;
+      --bg: #FFFFFF;
+      --surface: #FFFBEA;
+      --nav-text: #FFFFFF;
+      /* white as in your design; use var(--ink) for better contrast on yellow */
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      font-family: "Rubik", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--bg)
+    }
+
+    a {
+      color: inherit
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.1;
+      margin: 0;
+      letter-spacing: -.01em
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--ink);
+      outline-offset: 3px
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 24px
+    }
+
+    /* top bar */
+    .topbar {
+      background: var(--red);
+      color: #fff;
+      font-size: 14px
+    }
+
+    .topbar .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-block: 7px
+    }
+
+    .topbar a {
+      color: var(--yellow);
+      text-decoration: none;
+      font-weight: 500
+    }
+
+    /* masthead */
+    .masthead {
+      background: #fff
+    }
+
+    .masthead-grid {
+      display: grid;
+      grid-template-columns: 1fr minmax(320px, 590px) 1fr;
+      align-items: center;
+      gap: 20px;
+      padding-block: 22px
+    }
+
+    .logo {
+      display: inline-block;
+      text-decoration: none
+    }
+
+    .logo-mark {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--red);
+      border-radius: 10px;
+      width: 68px;
+      height: 58px;
+      color: var(--yellow);
+      padding: 4px;
+      line-height: 1
+    }
+
+    .logo-mark b {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -.04em;
+      text-shadow: 1px 1px 0 #7a1008
+    }
+
+    .logo-mark small {
+      font-size: 6px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.1;
+      letter-spacing: .02em;
+      text-transform: uppercase
+    }
+
+    .search {
+      display: flex;
+      border: 1px solid #C9C0BA;
+      background: #fff;
+      height: 52px
+    }
+
+    .search select {
+      border: 0;
+      border-right: 1px solid #C9C0BA;
+      background: #fff;
+      font: inherit;
+      padding: 0 14px;
+      width: 210px;
+      color: var(--ink);
+      cursor: pointer
+    }
+
+    .search input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      padding: 0 16px;
+      font: inherit;
+      background: transparent
+    }
+
+    .search input:focus-visible,
+    .search select:focus-visible {
+      outline-offset: -3px
+    }
+
+    .search button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 0 16px;
+      cursor: pointer
+    }
+
+    .search button:hover {
+      color: var(--red)
+    }
+
+    .tools {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 18px
+    }
+
+    .tool {
+      color: var(--red);
+      display: inline-flex;
+      position: relative
+    }
+
+    .badge {
+      position: absolute;
+      top: -9px;
+      right: -12px;
+      background: #000;
+      color: #fff;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      font-size: 12px;
+      display: grid;
+      place-items: center
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      color: var(--ink);
+      cursor: pointer;
+      padding: 0
+    }
+
+    /* nav bar: red block + yellow strip */
+    .navbar {
+      background: var(--yellow);
+      position: relative;
+      z-index: 20
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: stretch;
+      min-height: 74px
+    }
+
+    .catmenu {
+      position: relative;
+      width: clamp(260px, 25vw, 430px);
+      flex: none
+    }
+
+    .catmenu-btn {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--red);
+      color: #fff;
+      border: 0;
+      cursor: pointer;
+      font: 700 19px "Rubik", sans-serif;
+      text-transform: uppercase;
+      padding: 0 28px
+    }
+
+    .catmenu-btn:hover {
+      background: var(--red-dark)
+    }
+
+    .catpanel {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      margin: 0;
+      padding: 8px 0;
+      list-style: none;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-top: 0;
+      box-shadow: 0 14px 30px rgba(43, 20, 16, .14);
+      max-height: 70vh;
+      overflow: auto
+    }
+
+    .catpanel[hidden] {
+      display: none
+    }
+
+    .catpanel a {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 11px 24px;
+      text-decoration: none;
+      font-weight: 500
+    }
+
+    .catpanel a:hover {
+      background: var(--yellow-soft);
+      color: var(--red)
+    }
+
+    .mainnav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-left: 20px;
+      flex-wrap: wrap
+    }
+
+    .mainnav>a,
+    .dd-toggle {
+      color: var(--nav-text);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 20px;
+      padding: 10px 14px;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      border-bottom: 3px solid transparent
+    }
+
+    .mainnav>a:hover,
+    .dd-toggle:hover {
+      border-bottom-color: var(--red)
+    }
+
+    .mainnav [aria-current="page"] {
+      border-bottom-color: var(--red)
+    }
+
+    .chev {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg) translateY(-2px)
+    }
+
+    .dropdown {
+      position: relative
+    }
+
+    .dd-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 220px;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 14px 30px rgba(43, 20, 16, .14);
+      padding: 8px 0
+    }
+
+    .dd-menu a {
+      display: block;
+      padding: 11px 20px;
+      text-decoration: none;
+      font-weight: 500
+    }
+
+    .dd-menu a:hover {
+      background: var(--yellow-soft);
+      color: var(--red)
+    }
+
+    .dropdown:hover .dd-menu,
+    .dropdown:focus-within .dd-menu {
+      display: block
+    }
+
+    /* buttons */
+    .btn {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font: 600 17px "Rubik", sans-serif;
+      padding: 14px 30px;
+      border-radius: 999px;
+      border: 0;
+      text-decoration: none;
+      cursor: pointer
+    }
+
+    .btn:hover {
+      background: var(--red-dark)
+    }
+
+    .btn.small {
+      padding: 10px 20px;
+      font-size: 15px
+    }
+
+    /* hero banner carousel */
+    .hero {
+      position: relative;
+      background: #1a1412;
+      overflow: hidden;
+      user-select: none
+    }
+
+    .carousel-viewport {
+      position: relative;
+      width: 100%;
+      min-height: clamp(480px, 52vw, 620px);
+      overflow: hidden
+    }
+
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform .65s cubic-bezier(.25, 1, .5, 1);
+      will-change: transform
+    }
+
+    .slide {
+      min-width: 100%;
+      position: relative;
+      overflow: hidden;
+      min-height: clamp(480px, 52vw, 620px);
+      display: flex;
+      align-items: center
+    }
+
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 28%;
+      transition: transform 7s ease
+    }
+
+    .slide.active .slide-bg {
+      transform: scale(1.06)
+    }
+
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(20, 12, 10, .88) 0%, rgba(20, 12, 10, .68) 46%, rgba(20, 12, 10, .25) 75%, transparent 100%);
+      z-index: 2
+    }
+
+    @media(max-width:768px) {
+      .slide-overlay {
+        background: linear-gradient(180deg, rgba(20, 12, 10, .4) 0%, rgba(20, 12, 10, .86) 55%, rgba(20, 12, 10, .95) 100%)
+      }
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 3;
+      color: #fff;
+      padding-block: 60px;
+      max-width: 640px
+    }
+
+    .slide-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--yellow);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 18px
+    }
+
+    .slide h1 {
+      font-size: clamp(36px, 5.2vw, 66px);
+      font-weight: 700;
+      line-height: 1.12;
+      margin-bottom: 16px;
+      color: #fff;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, .4)
+    }
+
+    .slide-text {
+      font-size: clamp(16px, 2vw, 20px);
+      margin: 0 0 28px;
+      opacity: .92;
+      line-height: 1.55;
+      max-width: 520px;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .4)
+    }
+
+    .slide .btn {
+      background: var(--red);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 14px 34px;
+      box-shadow: 0 8px 24px rgba(220, 42, 30, .45);
+      transition: transform .2s, background .2s, box-shadow .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none
+    }
+
+    .slide .btn:hover {
+      background: #fff;
+      color: var(--red);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .35)
+    }
+
+    /* carousel controls */
+    .carousel-ctrl-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .18);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255, 255, 255, .35);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all .25s;
+      padding: 0
+    }
+
+    .carousel-ctrl-btn:hover {
+      background: var(--yellow);
+      color: var(--ink);
+      border-color: var(--yellow);
+      transform: translateY(-50%) scale(1.08)
+    }
+
+    .carousel-ctrl-btn.prev {
+      left: 24px
+    }
+
+    .carousel-ctrl-btn.next {
+      right: 24px
+    }
+
+    .slide-meta-bar {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 10
+    }
+
+    .slide-counter {
+      background: rgba(0, 0, 0, .45);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .2);
+      letter-spacing: 1px
+    }
+
+    .pause-toggle {
+      background: rgba(0, 0, 0, .45);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, .2);
+      color: #fff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      padding: 0;
+      transition: all .2s
+    }
+
+    .pause-toggle:hover {
+      background: var(--yellow);
+      color: var(--ink);
+      border-color: var(--yellow)
+    }
+
+    /* progress bar */
+    .carousel-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: rgba(255, 255, 255, .2);
+      z-index: 10
+    }
+
+    .carousel-progress-fill {
+      height: 100%;
+      width: 0;
+      background: var(--yellow);
+      transition: width linear
+    }
+
+    /* dots indicator */
+    .carousel-dots {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .4);
+      border: 1.5px solid rgba(255, 255, 255, .8);
+      cursor: pointer;
+      padding: 0;
+      transition: all .3s
+    }
+
+    .carousel-dot.active {
+      background: var(--yellow);
+      border-color: var(--yellow);
+      width: 26px;
+      border-radius: 999px
+    }
+
+    /* thumbnail preview strip */
+    .hero-thumbs {
+      background: #1a1412;
+      border-top: 1px solid rgba(255, 255, 255, .12);
+      padding: 14px 0
+    }
+
+    .thumbs-track {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px
+    }
+
+    .hero-thumb {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .05);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all .25s;
+      color: #fff;
+      text-align: left
+    }
+
+    .hero-thumb:hover {
+      background: rgba(255, 255, 255, .1)
+    }
+
+    .hero-thumb.active {
+      background: rgba(255, 255, 255, .15);
+      border-color: var(--yellow)
+    }
+
+    .hero-thumb img {
+      width: 56px;
+      height: 42px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0
+    }
+
+    .thumb-info strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.2
+    }
+
+    .hero-thumb.active .thumb-info strong {
+      color: var(--yellow)
+    }
+
+    .thumb-info span {
+      font-size: 12px;
+      opacity: .7;
+      display: block;
+      line-height: 1.2;
+      margin-top: 2px
+    }
+
+    @media(max-width:960px) {
+      .thumbs-track {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .carousel-ctrl-btn {
+        width: 42px;
+        height: 42px
+      }
+
+      .carousel-ctrl-btn.prev {
+        left: 12px
+      }
+
+      .carousel-ctrl-btn.next {
+        right: 12px
+      }
+    }
+
+    @media(max-width:640px) {
+      .hero-thumbs {
+        display: none
+      }
+
+      .slide-content {
+        padding-block: 36px
+      }
+
+      .carousel-viewport {
+        min-height: 430px
+      }
+
+      .slide {
+        min-height: 430px
+      }
+    }
+
+    /* promises */
+    .promises {
+      border-bottom: 1px solid var(--line)
+    }
+
+    .promise-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr)
+    }
+
+    .promise-grid div {
+      padding: 24px 18px;
+      border-left: 1px solid var(--line)
+    }
+
+    .promise-grid div:first-child {
+      border-left: 0;
+      padding-left: 0
+    }
+
+    .promise-grid strong {
+      display: block;
+      font-size: 19px;
+      color: var(--red)
+    }
+
+    .promise-grid span {
+      color: var(--muted);
+      font-size: 15px
+    }
+
+    /* sections */
+    .section {
+      padding: 70px 0
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 30px
+    }
+
+    .section-head h2,
+    .about-grid h2 {
+      font-size: clamp(30px, 4.4vw, 50px);
+      font-weight: 700;
+      letter-spacing: -.02em
+    }
+
+    .more {
+      color: var(--red);
+      font-weight: 600
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px
+    }
+
+    .cat {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      text-decoration: none
+    }
+
+    .cat:hover {
+      border-color: var(--red);
+      background: var(--yellow-soft)
+    }
+
+    .cat .ico {
+      font-size: 40px;
+      line-height: 1
+    }
+
+    .cat h3 {
+      font-size: 19px;
+      font-weight: 600
+    }
+
+    .cat small {
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    .depts {
+      background: var(--red);
+      color: #fff
+    }
+
+    .dept-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px
+    }
+
+    .dept {
+      display: block;
+      padding: 26px 22px;
+      border: 2px solid rgba(255, 255, 255, .4);
+      border-radius: var(--radius);
+      text-decoration: none
+    }
+
+    .dept:hover {
+      border-color: var(--yellow);
+      background: rgba(255, 255, 255, .08)
+    }
+
+    .dept h3 {
+      font-size: 26px;
+      color: var(--yellow);
+      margin-bottom: 8px
+    }
+
+    .dept p {
+      margin: 0;
+      opacity: .92
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 56px;
+      align-items: start
+    }
+
+    .about-grid p {
+      max-width: 62ch;
+      margin: 0 0 18px
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 28px
+    }
+
+    .facts div {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px
+    }
+
+    .facts strong {
+      display: block;
+      font-size: 32px;
+      color: var(--red);
+      line-height: 1
+    }
+
+    .facts span {
+      font-size: 14px;
+      color: var(--muted)
+    }
+
+    .page-head {
+      background: var(--yellow);
+      padding: 46px 0
+    }
+
+    .page-head h1 {
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 700
+    }
+
+    .page-head p {
+      margin: 10px 0 0
+    }
+
+    .crumbs {
+      font-size: 14px;
+      margin: 0 0 10px !important
+    }
+
+    .crumbs a {
+      text-decoration: none;
+      color: var(--red);
+      font-weight: 500
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px
+    }
+
+    .product {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .thumb {
+      background: var(--yellow-soft);
+      border-radius: 10px;
+      aspect-ratio: 4/3;
+      display: grid;
+      place-items: center;
+      font-size: 64px
+    }
+
+    .product h3 {
+      font-size: 17px;
+      font-weight: 500
+    }
+
+    .price {
+      margin: 0;
+      font-weight: 700;
+      color: var(--red);
+      font-size: 20px
+    }
+
+    .product .btn {
+      margin-top: auto;
+      align-self: flex-start
+    }
+
+    .empty {
+      text-align: center;
+      padding: 40px 0
+    }
+
+    .empty h1,
+    .empty h2 {
+      margin-bottom: 10px
+    }
+
+    .empty p {
+      color: var(--muted);
+      margin: 0 0 22px
+    }
+
+    /* footer */
+    .footer {
+      background: var(--ink);
+      color: #F4E9E2;
+      padding: 50px 0 24px
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 30px
+    }
+
+    .footer h4 {
+      color: var(--yellow);
+      margin-bottom: 12px;
+      font-size: 18px
+    }
+
+    .footer a {
+      display: block;
+      text-decoration: none;
+      margin-bottom: 6px
+    }
+
+    .footer a:hover {
+      color: var(--yellow)
+    }
+
+    .footer p {
+      margin: 0 0 6px
+    }
+
+    .copy {
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, .15);
+      font-size: 14px;
+      opacity: .8
+    }
+
+    /* responsive */
+    @media(max-width:1100px) {
+
+      .mainnav>a,
+      .dd-toggle {
+        font-size: 16px;
+        padding: 10px 10px
+      }
+    }
+
+    @media(max-width:860px) {
+      .masthead-grid {
+        grid-template-columns: auto 1fr;
+        grid-template-areas: "logo tools" "search search"
+      }
+
+      .logo {
+        grid-area: logo
+      }
+
+      .tools {
+        grid-area: tools
+      }
+
+      .search {
+        grid-area: search
+      }
+
+      .search select {
+        width: 130px
+      }
+
+      .menu-toggle {
+        display: inline-flex
+      }
+
+      .navbar-inner {
+        flex-direction: column
+      }
+
+      .catmenu {
+        width: 100%
+      }
+
+      .catmenu-btn {
+        padding: 16px 20px;
+        font-size: 16px
+      }
+
+      .catpanel {
+        position: static;
+        box-shadow: none
+      }
+
+      .mainnav {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 8px 20px 16px;
+        gap: 0
+      }
+
+      .mainnav.open {
+        display: flex
+      }
+
+      .mainnav>a,
+      .dd-toggle {
+        color: var(--ink);
+        font-size: 16px;
+        border-bottom: 1px solid rgba(43, 20, 16, .15)
+      }
+
+      .dd-menu {
+        position: static;
+        display: block;
+        border: 0;
+        box-shadow: none;
+        background: transparent;
+        padding: 0 0 0 14px
+      }
+
+      .slide-inner {
+        grid-template-columns: 1fr
+      }
+
+      .slide-art {
+        display: none
+      }
+
+      .promise-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .promise-grid div:nth-child(3) {
+        border-left: 0;
+        padding-left: 0
+      }
+
+      .promise-grid div {
+        border-top: 1px solid var(--line)
+      }
+
+      .promise-grid div:nth-child(-n+2) {
+        border-top: 0
+      }
+
+      .dept-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .about-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px
+      }
+    }
+
+    @media(max-width:480px) {
+      .dept-grid {
+        grid-template-columns: 1fr
+      }
+
+      .cat-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      * {
+        scroll-behavior: auto !important;
+        transition: none !important
+      }
+    }
+
+    html {
+      scroll-padding-top: 0
+    }
+
+    .cat[hidden] {
+      display: none
+    }
+
+    .no-results {
+      display: none;
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 0
+    }
+
+    .no-results.show {
+      display: block
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="container">
+      <span>Today's deal: Sale up to 50% OFF</span>
+      <a href="mailto:info@2ksupermart.com">info@2ksupermart.com</a>
+    </div>
+  </div>
+
+  <header class="masthead">
+    <div class="container masthead-grid">
+      <a class="logo" href="#top" aria-label="2K Supermart home">
+        <span class="logo-mark"><b>2K</b><small>Supermart<br>&amp; Pharmacy</small></span>
+      </a>
+
+      <form class="search" id="searchform" role="search">
+        <select id="catselect" aria-label="Category">
+          <option value="">All Categories</option>
+          <option value="groceries">Groceries</option>
+          <option value="farmers-market">Farmers Market</option>
+          <option value="bakery-restaurants">Bakery & Restaurants</option>
+          <option value="baby-foods-care">Baby Foods & Care</option>
+          <option value="non-alcoholic-drinks">Non-Alcoholic Drinks</option>
+          <option value="alcoholic-drinks">Alcoholic Drinks</option>
+          <option value="pharmacy">Pharmacy</option>
+          <option value="cosmetics">Cosmetics (Orange Corner)</option>
+          <option value="personal-care">Personal Care & Lifestyle</option>
+          <option value="kitchen-cooking">Kitchen & Cooking</option>
+          <option value="home-office">Home & Office</option>
+          <option value="electronics">Electronics & Accessories</option>
+          <option value="hardware-tools">Hardware & Tools</option>
+          <option value="fashion">Fashion & Clothings</option>
+          <option value="pets">Pets</option>
+        </select>
+        <input type="search" id="q" placeholder="Search…" aria-label="Search categories">
+        <button type="submit" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="10" cy="10" r="6.5" />
+            <path d="M15 15l6 6" />
+          </svg>
+        </button>
+      </form>
+
+
+      <div class="tools">
+        <a href="#" aria-label="Account" class="tool">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="8" r="4.2" />
+            <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z" />
+          </svg>
+        </a>
+        <a href="#" aria-label="Cart, 0 items" class="tool cart">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M2 3h3l2.4 12h11L21 7H6" />
+            <circle cx="9" cy="20" r="1.5" />
+            <circle cx="17" cy="20" r="1.5" />
+          </svg>
+          <span class="badge">0</span>
+        </a>
+        <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="navbar">
+    <div class="container navbar-inner" style="max-width:none;padding:0">
+      <div class="catmenu">
+        <button class="catmenu-btn" aria-expanded="false" aria-controls="catpanel">
+          <span>Shop by categories</span>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4">
+            <path d="M3 6h18M3 12h18M3 18h18" />
+          </svg>
+        </button>
+        <ul class="catpanel" id="catpanel" hidden>
+          <li><a href="#cat-groceries" data-goto="groceries"><span>🛒</span> Groceries</a></li>
+          <li><a href="#cat-farmers-market" data-goto="farmers-market"><span>🥬</span> Farmers Market</a></li>
+          <li><a href="#cat-bakery-restaurants" data-goto="bakery-restaurants"><span>🥐</span> Bakery & Restaurants</a>
+          </li>
+          <li><a href="#cat-baby-foods-care" data-goto="baby-foods-care"><span>🍼</span> Baby Foods & Care</a></li>
+          <li><a href="#cat-non-alcoholic-drinks" data-goto="non-alcoholic-drinks"><span>🧃</span> Non-Alcoholic
+              Drinks</a></li>
+          <li><a href="#cat-alcoholic-drinks" data-goto="alcoholic-drinks"><span>🍷</span> Alcoholic Drinks</a></li>
+          <li><a href="#cat-pharmacy" data-goto="pharmacy"><span>💊</span> Pharmacy</a></li>
+          <li><a href="#cat-cosmetics" data-goto="cosmetics"><span>💄</span> Cosmetics (Orange Corner)</a></li>
+          <li><a href="#cat-personal-care" data-goto="personal-care"><span>🧴</span> Personal Care & Lifestyle</a></li>
+          <li><a href="#cat-kitchen-cooking" data-goto="kitchen-cooking"><span>🍳</span> Kitchen & Cooking</a></li>
+          <li><a href="#cat-home-office" data-goto="home-office"><span>🏠</span> Home & Office</a></li>
+          <li><a href="#cat-electronics" data-goto="electronics"><span>🔌</span> Electronics & Accessories</a></li>
+          <li><a href="#cat-hardware-tools" data-goto="hardware-tools"><span>🔧</span> Hardware & Tools</a></li>
+          <li><a href="#cat-fashion" data-goto="fashion"><span>👕</span> Fashion & Clothings</a></li>
+          <li><a href="#cat-pets" data-goto="pets"><span>🐾</span> Pets</a></li>
+        </ul>
+      </div>
+
+      <nav class="mainnav" id="mainnav" aria-label="Main">
+        <a href="#top" aria-current="page">Home</a>
+        <a href="#categories">Our Categories</a>
+        <a href="#about">About Us</a>
+      </nav>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <section class="hero" id="heroCarousel" aria-roledescription="carousel" aria-label="Featured 2K Supermart offers">
+      <div class="carousel-viewport">
+
+        <!-- Meta: Counter & Pause -->
+        <div class="slide-meta-bar">
+          <div class="slide-counter" id="heroCounter">1 / 4</div>
+          <button class="pause-toggle" id="heroPauseBtn" aria-label="Pause banner rotation" title="Pause / Resume">
+            <svg id="pauseIconSvg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+            </svg>
+            <svg id="playIconSvg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Arrow Controls -->
+        <button class="carousel-ctrl-btn prev" id="heroPrevBtn" aria-label="Previous banner">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <button class="carousel-ctrl-btn next" id="heroNextBtn" aria-label="Next banner">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+
+        <!-- Slide Track -->
+        <div class="carousel-track" id="heroTrack">
+
+          <!-- Slide 1: Store Exterior at Isi Plaza -->
+          <article class="slide active" role="group" aria-roledescription="slide"
+            aria-label="1 of 4: 2K Supermart Isi Plaza">
+            <img class="slide-bg" src="store_exterior.jpg" alt="2K Supermart & Pharmacy at Isi Plaza storefront"
+              loading="eager" style="object-position:center 38%;" />
+            <div class="slide-overlay"></div>
+            <div class="container slide-content">
+              <span class="slide-tag">🏬 Welcome to 2K Supermart</span>
+              <h1>Your Neighborhood<br>Store at Isi Plaza</h1>
+              <p class="slide-text">Serving our community with quality groceries, trusted pharmacy items, and everyday
+                household essentials under one roof.</p>
+              <a class="btn" href="#departments">Explore Our Store &rarr;</a>
+            </div>
+          </article>
+
+          <!-- Slide 2: Aisles & Groceries -->
+          <article class="slide" role="group" aria-roledescription="slide"
+            aria-label="2 of 4: Aisles and Everyday Goods">
+            <img class="slide-bg" src="store_aisles.jpg" alt="Stocked grocery aisles and snacks at 2K Supermart"
+              loading="lazy" style="object-position:center 15%;" />
+            <div class="slide-overlay"></div>
+            <div class="container slide-content">
+              <span class="slide-tag">🛒 Groceries &amp; Snacks</span>
+              <h1>Aisles Full Of<br>Exciting Goods</h1>
+              <p class="slide-text">From chips, snacks and pantry staples to chilled beverages and home goods — discover
+                great value on every shelf.</p>
+              <a class="btn" href="#cat-groceries" data-goto="groceries">Shop Groceries &rarr;</a>
+            </div>
+          </article>
+
+          <!-- Slide 3: Pharmacy & Baby Care -->
+          <article class="slide" role="group" aria-roledescription="slide" aria-label="3 of 4: Pharmacy and Baby Care">
+            <img class="slide-bg" src="store_pharmacy.jpg" alt="Pharmacy and baby care section inside 2K Supermart"
+              loading="lazy" style="object-position:center 20%;" />
+            <div class="slide-overlay"></div>
+            <div class="container slide-content">
+              <span class="slide-tag">💊 Pharmacy &amp; Baby Care</span>
+              <h1>Trusted Healthcare &amp;<br>Baby Care Essentials</h1>
+              <p class="slide-text">Over-the-counter medicines, baby foods, toiletries and healthcare products you and
+                your family can count on.</p>
+              <a class="btn" href="#cat-pharmacy" data-goto="pharmacy">Visit Pharmacy &rarr;</a>
+            </div>
+          </article>
+
+          <!-- Slide 4: Checkout & Friendly Service -->
+          <article class="slide" role="group" aria-roledescription="slide"
+            aria-label="4 of 4: Quick Service and Checkout">
+            <img class="slide-bg" src="store_counter.jpg" alt="Checkout counter and snacks display at 2K Supermart"
+              loading="lazy" style="object-position:center 30%;" />
+            <div class="slide-overlay"></div>
+            <div class="container slide-content">
+              <span class="slide-tag">✨ Quick &amp; Friendly Service</span>
+              <h1>Warm Smiles &amp;<br>Fast, Easy Checkout</h1>
+              <p class="slide-text">Our friendly team is always dedicated to making your shopping experience convenient,
+                welcoming and delightful.</p>
+              <a class="btn" href="#about">About 2K Supermart &rarr;</a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="carousel-progress">
+          <div class="carousel-progress-fill" id="heroProgress"></div>
+        </div>
+
+        <!-- Dots -->
+        <div class="carousel-dots" id="heroDots" role="tablist" aria-label="Banner navigation">
+          <button class="carousel-dot active" role="tab" aria-selected="true" data-index="0"
+            aria-label="Slide 1"></button>
+          <button class="carousel-dot" role="tab" aria-selected="false" data-index="1" aria-label="Slide 2"></button>
+          <button class="carousel-dot" role="tab" aria-selected="false" data-index="2" aria-label="Slide 3"></button>
+          <button class="carousel-dot" role="tab" aria-selected="false" data-index="3" aria-label="Slide 4"></button>
+        </div>
+
+      </div>
+
+      <!-- Interactive Thumbnails Strip -->
+      <div class="hero-thumbs">
+        <div class="container">
+          <div class="thumbs-track" id="heroThumbs">
+            <button class="hero-thumb active" data-index="0" type="button">
+              <img src="store_exterior.jpg" alt="Thumb Exterior" />
+              <div class="thumb-info">
+                <strong>Isi Plaza Store</strong>
+                <span>2K Supermart storefront</span>
+              </div>
+            </button>
+            <button class="hero-thumb" data-index="1" type="button">
+              <img src="store_aisles.jpg" alt="Thumb Aisles" />
+              <div class="thumb-info">
+                <strong>Stocked Aisles</strong>
+                <span>Snacks, drinks & staples</span>
+              </div>
+            </button>
+            <button class="hero-thumb" data-index="2" type="button">
+              <img src="store_pharmacy.jpg" alt="Thumb Pharmacy" />
+              <div class="thumb-info">
+                <strong>Pharmacy & Care</strong>
+                <span>Health & baby goods</span>
+              </div>
+            </button>
+            <button class="hero-thumb" data-index="3" type="button">
+              <img src="store_counter.jpg" alt="Thumb Checkout" />
+              <div class="thumb-info">
+                <strong>Friendly Checkout</strong>
+                <span>Quick & easy shopping</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="promises">
+      <div class="container promise-grid">
+        <div><strong>Free shipping</strong><span>On all orders above ₦20,000</span></div>
+        <div><strong>Returns policy</strong><span>Returns within 3 days</span></div>
+        <div><strong>100% safe payment</strong><span>Your payments are secure</span></div>
+        <div><strong>24/7 support</strong><span>Contact us any time</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="categories">
+      <div class="container">
+        <div class="section-head">
+          <h2>Shop by category</h2>
+        </div>
+        <div class="cat-grid">
+          <a class="cat" id="cat-groceries" href="#cat-groceries" data-name="groceries" data-slug="groceries">
+            <span class="ico" aria-hidden="true">🛒</span>
+            <span>
+              <h3>Groceries</h3><small>Best prices and discounts on everyday staples.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-farmers-market" href="#cat-farmers-market" data-name="farmers market"
+            data-slug="farmers-market">
+            <span class="ico" aria-hidden="true">🥬</span>
+            <span>
+              <h3>Farmers Market</h3><small>Fresh vegetables and protein-rich grains.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-bakery-restaurants" href="#cat-bakery-restaurants" data-name="bakery & restaurants"
+            data-slug="bakery-restaurants">
+            <span class="ico" aria-hidden="true">🥐</span>
+            <span>
+              <h3>Bakery & Restaurants</h3><small>Freshly baked bread and pastries.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-baby-foods-care" href="#cat-baby-foods-care" data-name="baby foods & care"
+            data-slug="baby-foods-care">
+            <span class="ico" aria-hidden="true">🍼</span>
+            <span>
+              <h3>Baby Foods & Care</h3><small>Everything for the little ones.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-non-alcoholic-drinks" href="#cat-non-alcoholic-drinks" data-name="non-alcoholic drinks"
+            data-slug="non-alcoholic-drinks">
+            <span class="ico" aria-hidden="true">🧃</span>
+            <span>
+              <h3>Non-Alcoholic Drinks</h3><small>Juices, sodas and water.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-alcoholic-drinks" href="#cat-alcoholic-drinks" data-name="alcoholic drinks"
+            data-slug="alcoholic-drinks">
+            <span class="ico" aria-hidden="true">🍷</span>
+            <span>
+              <h3>Alcoholic Drinks</h3><small>Wines, beers and spirits.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-pharmacy" href="#cat-pharmacy" data-name="pharmacy" data-slug="pharmacy">
+            <span class="ico" aria-hidden="true">💊</span>
+            <span>
+              <h3>Pharmacy</h3><small>Medicines, health and wellness.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-cosmetics" href="#cat-cosmetics" data-name="cosmetics (orange corner)"
+            data-slug="cosmetics">
+            <span class="ico" aria-hidden="true">💄</span>
+            <span>
+              <h3>Cosmetics (Orange Corner)</h3><small>Quality products at our Orange Corner.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-personal-care" href="#cat-personal-care" data-name="personal care & lifestyle"
+            data-slug="personal-care">
+            <span class="ico" aria-hidden="true">🧴</span>
+            <span>
+              <h3>Personal Care & Lifestyle</h3><small>Look and feel your best.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-kitchen-cooking" href="#cat-kitchen-cooking" data-name="kitchen & cooking"
+            data-slug="kitchen-cooking">
+            <span class="ico" aria-hidden="true">🍳</span>
+            <span>
+              <h3>Kitchen & Cooking</h3><small>Cookware, tools and appliances.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-home-office" href="#cat-home-office" data-name="home & office" data-slug="home-office">
+            <span class="ico" aria-hidden="true">🏠</span>
+            <span>
+              <h3>Home & Office</h3><small>For around the house and the desk.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-electronics" href="#cat-electronics" data-name="electronics & accessories"
+            data-slug="electronics">
+            <span class="ico" aria-hidden="true">🔌</span>
+            <span>
+              <h3>Electronics & Accessories</h3><small>Gadgets, chargers and accessories.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-hardware-tools" href="#cat-hardware-tools" data-name="hardware & tools"
+            data-slug="hardware-tools">
+            <span class="ico" aria-hidden="true">🔧</span>
+            <span>
+              <h3>Hardware & Tools</h3><small>For repairs and builds.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-fashion" href="#cat-fashion" data-name="fashion & clothings" data-slug="fashion">
+            <span class="ico" aria-hidden="true">👕</span>
+            <span>
+              <h3>Fashion & Clothings</h3><small>Everyday wear.</small>
+            </span>
+          </a>
+          <a class="cat" id="cat-pets" href="#cat-pets" data-name="pets" data-slug="pets">
+            <span class="ico" aria-hidden="true">🐾</span>
+            <span>
+              <h3>Pets</h3><small>Food and care for your pets.</small>
+            </span>
+          </a>
+        </div>
+        <p class="no-results" id="noresults">No category matches your search.</p>
+      </div>
+    </section>
+
+    <section class="section depts" id="departments">
+      <div class="container">
+        <div class="section-head">
+          <h2>Our departments</h2>
+        </div>
+        <div class="dept-grid">
+          <a class="dept" href="#cat-groceries" data-goto="groceries">
+            <h3>Supermart</h3>
+            <p>Groceries and household staples.</p>
+          </a>
+          <a class="dept" href="#cat-pharmacy" data-goto="pharmacy">
+            <h3>Pharmacy</h3>
+            <p>Medicines and health products.</p>
+          </a>
+          <a class="dept" href="#cat-farmers-market" data-goto="farmers-market">
+            <h3>Farmers Market</h3>
+            <p>Fresh produce and grains.</p>
+          </a>
+          <a class="dept" href="#cat-bakery-restaurants" data-goto="bakery-restaurants">
+            <h3>Bakery</h3>
+            <p>Bread and pastries, baked fresh.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <h2>A friendly place to do your shopping.</h2>
+        <div>
+          <p>We are a team of passionate people whose goal is to improve everyone's shopping experience by creating a
+            friendly shopping experience. We build great customer relationships which help us solve your personal
+            shopping needs. Our goal is to create a WOW shopping experience for all who come in contact with us.</p>
+          <p>Our supermarket has been serving for over 2 years. We are proud to offer a wide selection of high-quality,
+            affordable products to you, our customers. Our friendly and knowledgeable staff are always happy to help you
+            find what you need. We are committed to providing excellent customer service and making your shopping
+            experience as convenient and enjoyable as possible in a very friendly atmosphere.</p>
+          <p>We look forward to seeing you at 2K Supermart!</p>
+          <div class="facts">
+            <div><strong>2+</strong><span>years serving you</span></div>
+            <div><strong>15</strong><span>categories</span></div>
+            <div><strong>24/7</strong><span>support</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:info@2ksupermart.com">info@2ksupermart.com</a>
+        <a href="tel:+2349128116866">📞 0912 811 6866</a>
+        <p>Support available 24/7</p>
+      </div>
+      <div>
+        <h4>Location</h4>
+        <a href="https://www.google.com/maps/place/2K+Supermart/@9.0707639,7.4236566,18.07z/data=!4m6!3m5!1s0x1050816a14aa6e5d:0x8c083639af7e9d01!8m2!3d9.0707639!4d7.4248311!16s%2Fg%2F11t20zph9d?entry=ttu"
+          target="_blank" rel="noopener noreferrer">
+          📍 69 Alex Ekwueme Wy, Jabi, Gwarinpa 900108, Federal Capital Territory
+        </a>
+        <p>Isi Plaza, Abuja</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#departments">Our Departments</a>
+        <a href="#cat-groceries">Supermart &amp; Groceries</a>
+        <a href="#cat-pharmacy">Pharmacy &amp; Health</a>
+        <a href="#about">About 2K Supermart</a>
+      </div>
+    </div>
+    <div class="container copy">© 2K Supermart. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Shop-by-categories dropdown, mobile menu, hero carousel
+    (function () {
+      var btn = document.querySelector('.catmenu-btn');
+      var panel = document.getElementById('catpanel');
+      if (btn && panel) {
+        btn.addEventListener('click', function () {
+          var open = panel.hasAttribute('hidden');
+          panel.toggleAttribute('hidden', !open);
+          btn.setAttribute('aria-expanded', String(open));
+        });
+        document.addEventListener('click', function (e) {
+          if (!e.target.closest('.catmenu')) {
+            panel.setAttribute('hidden', '');
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      var toggle = document.querySelector('.menu-toggle');
+      var nav = document.getElementById('mainnav');
+      if (toggle && nav) {
+        toggle.addEventListener('click', function () {
+          var open = nav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', String(open));
+        });
+      }
+
+      // Enhanced Hero Banner Carousel
+      var INTERVAL = 5500;
+      var track = document.getElementById('heroTrack');
+      var slides = Array.prototype.slice.call(track ? track.querySelectorAll('.slide') : []);
+      var dots = Array.prototype.slice.call(document.querySelectorAll('#heroDots .carousel-dot'));
+      var thumbs = Array.prototype.slice.call(document.querySelectorAll('#heroThumbs .hero-thumb'));
+      var prevBtn = document.getElementById('heroPrevBtn');
+      var nextBtn = document.getElementById('heroNextBtn');
+      var pauseBtn = document.getElementById('heroPauseBtn');
+      var pauseIcon = document.getElementById('pauseIconSvg');
+      var playIcon = document.getElementById('playIconSvg');
+      var counter = document.getElementById('heroCounter');
+      var progressBar = document.getElementById('heroProgress');
+      var heroContainer = document.getElementById('heroCarousel');
+
+      if (slides.length > 1 && track) {
+        var currentIndex = 0;
+        var totalSlides = slides.length;
+        var isPaused = false;
+        var timer = null;
+        var progressStart = null;
+        var rafId = null;
+
+        function goTo(index) {
+          slides[currentIndex].classList.remove('active');
+          if (dots[currentIndex]) {
+            dots[currentIndex].classList.remove('active');
+            dots[currentIndex].setAttribute('aria-selected', 'false');
+          }
+          if (thumbs[currentIndex]) {
+            thumbs[currentIndex].classList.remove('active');
+          }
+
+          currentIndex = (index + totalSlides) % totalSlides;
+
+          slides[currentIndex].classList.add('active');
+          if (dots[currentIndex]) {
+            dots[currentIndex].classList.add('active');
+            dots[currentIndex].setAttribute('aria-selected', 'true');
+          }
+          if (thumbs[currentIndex]) {
+            thumbs[currentIndex].classList.add('active');
+          }
+
+          track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+          if (counter) {
+            counter.textContent = (currentIndex + 1) + ' / ' + totalSlides;
+          }
+          resetProgress();
+        }
+
+        function nextSlide() { goTo(currentIndex + 1); }
+        function prevSlide() { goTo(currentIndex - 1); }
+
+        function clearRAF() {
+          if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        }
+
+        function startProgress() {
+          clearRAF();
+          progressStart = performance.now();
+          function step(now) {
+            var elapsed = now - progressStart;
+            var pct = Math.min((elapsed / INTERVAL) * 100, 100);
+            if (progressBar) progressBar.style.width = pct + '%';
+            if (pct < 100 && !isPaused) {
+              rafId = requestAnimationFrame(step);
+            }
+          }
+          rafId = requestAnimationFrame(step);
+        }
+
+        function resetProgress() {
+          clearRAF();
+          if (progressBar) progressBar.style.width = '0%';
+          if (!isPaused) startProgress();
+        }
+
+        function startTimer() {
+          clearInterval(timer);
+          timer = setInterval(nextSlide, INTERVAL);
+          startProgress();
+        }
+
+        function stopTimer() {
+          clearInterval(timer);
+          clearRAF();
+        }
+
+        function togglePause() {
+          isPaused = !isPaused;
+          if (pauseIcon) pauseIcon.style.display = isPaused ? 'none' : 'block';
+          if (playIcon) playIcon.style.display = isPaused ? 'block' : 'none';
+          if (isPaused) {
+            stopTimer();
+          } else {
+            startTimer();
+          }
+        }
+
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+        if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
+
+        dots.forEach(function (dot) {
+          dot.addEventListener('click', function () {
+            goTo(parseInt(dot.dataset.index, 10));
+          });
+        });
+
+        thumbs.forEach(function (thumb) {
+          thumb.addEventListener('click', function () {
+            goTo(parseInt(thumb.dataset.index, 10));
+          });
+        });
+
+        // Mobile touch swipe
+        var touchStartX = 0;
+        track.addEventListener('touchstart', function (e) {
+          touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', function (e) {
+          var diffX = touchStartX - e.changedTouches[0].clientX;
+          if (Math.abs(diffX) > 40) {
+            if (diffX > 0) nextSlide();
+            else prevSlide();
+          }
+        }, { passive: true });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function (e) {
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+          if (e.key === 'ArrowRight') nextSlide();
+          if (e.key === 'ArrowLeft') prevSlide();
+          if (e.key === ' ' && heroContainer && heroContainer.contains(document.activeElement)) {
+            e.preventDefault();
+            togglePause();
+          }
+        });
+
+        // Pause on hover
+        if (heroContainer) {
+          heroContainer.addEventListener('mouseenter', stopTimer);
+          heroContainer.addEventListener('mouseleave', function () {
+            if (!isPaused) startTimer();
+          });
+        }
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          startTimer();
+        }
+      }
+
+      // Search + category filter (filters the category cards)
+      var form = document.getElementById('searchform');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.cat-grid .cat'));
+      var none = document.getElementById('noresults');
+      function filter() {
+        var q = document.getElementById('q').value.trim().toLowerCase();
+        var c = document.getElementById('catselect').value;
+        var shown = 0;
+        cards.forEach(function (card) {
+          var ok = (!q || card.dataset.name.indexOf(q) > -1) && (!c || card.dataset.slug === c);
+          card.hidden = !ok;
+          if (ok) shown++;
+        });
+        none.classList.toggle('show', shown === 0);
+      }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault(); filter();
+        document.getElementById('categories').scrollIntoView({ behavior: 'smooth' });
+      });
+      document.getElementById('q').addEventListener('input', filter);
+      document.getElementById('catselect').addEventListener('change', filter);
+
+      // Any link with data-goto highlights that category tile
+      document.querySelectorAll('[data-goto]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          document.getElementById('catselect').value = '';
+          document.getElementById('q').value = '';
+          filter();
+          var t = document.getElementById('cat-' + a.dataset.goto);
+          if (t) { t.style.outline = '3px solid var(--red)'; setTimeout(function () { t.style.outline = ''; }, 1800); }
+          if (panel) { panel.setAttribute('hidden', ''); }
+        });
+      });
+    })();
+
+  </script>
+</body>
+
+</html>
